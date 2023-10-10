@@ -1,9 +1,9 @@
 class LampaElem{
     ertek
     #index
-
+    #lepesszam=0
     constructor(szuloelem, index){
-       
+        
         this.szuloelem = szuloelem
         this.#htmlOsszerak()
         this.#index = index
@@ -13,14 +13,15 @@ class LampaElem{
         
         this.ertek = this.setErtek();
         this.elem.on("click", () => {
-            this.#setSzin();
-            console.log("zöld")
+            this.#kattintasTrigger("kapcsolas")
+            this.setSzin();
+           
             
         })
     }
     setErtek(ertek) {
         this.ertek = !this.ertek;
-        this.#setSzin();
+        
         this.pElem.html(ertek);
         
 
@@ -33,19 +34,21 @@ class LampaElem{
         
         this.szuloelem.append(txt)
     }
-    #setSzin() {
-        if (this.ertek) {
+    setSzin(allapot) {
+       
+        if (allapot === 0) {
             this.elem.css("background-color", "orange");
-        } else {
+        } else if (allapot ===1){
             this.elem.css("background-color", "green");
         }
     }
     #kattintasTrigger() {
-        const EVENT = new CustomEvent("kapcsolas", {
-            detail : this,
-        });
+        const EVENT = new CustomEvent("kapcsolas", {detail:this}) 
+          
+    
         window.dispatchEvent(EVENT);
     }
+    
     getIndex(){
         return this.#index
     }
