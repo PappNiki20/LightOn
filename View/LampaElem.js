@@ -10,11 +10,11 @@ class LampaElem{
         this.kattinthato = true
         this.elem = $(".elem:last-child");
         this.pElem = this.elem.children("p");
-        
+        this.setallapot();
         this.ertek = this.setErtek();
         this.elem.on("click", () => {
             this.#kattintasTrigger("kapcsolas")
-            this.setSzin();
+            
            
             
         })
@@ -34,6 +34,16 @@ class LampaElem{
         
         this.szuloelem.append(txt)
     }
+    setallapot(){
+        for (let index = 0; index < 9; index++) {
+            const element =Math.floor(Math.random()*2)
+            if (element === 0) {
+                this.elem.css("background-color", "orange");
+            } else if (element ===1){
+                this.elem.css("background-color", "green");
+            }
+           }
+    }
     setSzin(allapot) {
        
         if (allapot === 0) {
@@ -41,7 +51,9 @@ class LampaElem{
         } else if (allapot ===1){
             this.elem.css("background-color", "green");
         }
-    }
+       }
+       
+    
     #kattintasTrigger() {
         const EVENT = new CustomEvent("kapcsolas", {detail:this}) 
           
